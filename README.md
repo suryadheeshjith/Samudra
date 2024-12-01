@@ -3,10 +3,12 @@ This repository contains the code of the Samudra Ocean Model described in the pa
 
 ## TODO
 
+- [ ] Using HuggingFace data is currently very slow to generate a rollout, need a better method.
 - [ ] Add # Samudra content 
 - [ ] Add visual aids (Rollout Video / Model arch fig)
 - [ ] Fix environment.yml
 - [ ] Fix citation
+- [ ] Code refactor / cleanup (?)
 
 
 ### Getting Started
