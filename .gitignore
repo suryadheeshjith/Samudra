@@ -2,6 +2,9 @@ upload_huggingface.ipynb
 *.zip
 *.pt
 .huggingface
+*.zarr
+outputs
+*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
