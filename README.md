@@ -1,6 +1,13 @@
 # Samudra
 This repository contains the code of the Samudra Ocean Model described in the paper "_insert_title_" (_insert_link_). Samudra is a ...
 
+## TODO
+
+- [ ] Add # Samudra content 
+- [ ] Add visual aids (Rollout Video / Model arch fig)
+- [ ] Fix environment.yml
+- [ ] Fix citation
+
 
 ### Getting Started
 1. Clone this repository. 
