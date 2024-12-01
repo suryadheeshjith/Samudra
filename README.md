@@ -11,7 +11,7 @@ This repository contains the code of the Samudra Ocean Model described in the pa
 The model weights can be downloaded from [here](https://huggingface.co/M2LInES/Samudra).
 
 ### Data
-The data used in the paper can be downloaded from [here](https://huggingface.co/M2LInES/Samudra_OM4). See the paper for more details on the data.
+The data used in the paper can be downloaded from [here](https://huggingface.co/datasets/M2LInES/Samudra_OM4). See the paper for more details on the data.
 
 ### Citing
 If you use this code in your research, please consider citing the following paper:
