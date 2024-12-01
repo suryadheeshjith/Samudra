@@ -12,7 +12,7 @@ This repository contains the code of the Samudra Ocean Model described in the pa
 ### Getting Started
 1. Clone this repository. 
 2. Create a new conda environment using the `environment.yml` file.
-3. Run the notebook `example.ipynb` to see how to generate a rollout with trained model weights.
+3. Run the notebook `samudra_rollout.ipynb` to see how to generate a rollout with trained model weights.
 
 ### Model Weights
 The model weights can be downloaded from [here](https://huggingface.co/M2LInES/Samudra).
