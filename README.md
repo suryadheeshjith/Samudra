@@ -1,9 +1,18 @@
 # Samudra 🌊
 This repository contains the code of the Samudra Ocean Emulator described in the paper ["Samudra: An AI Global Ocean Emulator for Climate"](https://arxiv.org/abs/2412.03795). Samudra is a skillful global emulator of the ocean component of a state-of-the-art climate model. We emulate key ocean variables, sea surface height, horizontal velocities, temperature, and salinity, across their full depth. 
 
+<p align="center">
+  <img src="/assets/globe.gif" >
+</p>
+
+
 ### Key features
 
 ✅ Reliable: Capable of reproducing the temperature structure and variability of a realistic 3D ocean climate model
+
+<p align="center">
+  <img src="/assets/enso.gif" >
+</p>
 
 ✅ Stable: run for multiple centuries in a realistic configuration with time-dependent forcing while maintaining stability and accuracy 
 
