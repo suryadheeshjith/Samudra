@@ -10,15 +10,15 @@ This repository contains the code of the Samudra Ocean Emulator described in the
 
 ✅ Reliable: Capable of reproducing the temperature structure and variability of a realistic 3D ocean climate model
 
-<p align="center">
-  <img src="/assets/enso.gif" >
-</p>
-
 ✅ Stable: run for multiple centuries in a realistic configuration with time-dependent forcing while maintaining stability and accuracy 
 
 ✅ Fast: it is 🚅150 times faster🚅 than its original counterpart 
 
 ✅ Open: Samudra is available on Hugging Face. Anyone can now run a global ocean emulator! 
+
+<p align="center">
+  <img src="/assets/enso.gif" >
+</p>
 
 ## TODO
 
