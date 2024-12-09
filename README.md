@@ -5,19 +5,13 @@ This repository contains the code of the Samudra Ocean Emulator described in the
   <img src="/assets/globe.gif" >
 </p>
 
-### TODO
-- [ ] Fix environment.yml
-- [ ] Training code
 
 ### Key features
 
-✅ Reliable: Capable of reproducing the temperature structure and variability of a realistic 3D ocean climate model
-
-✅ Stable: run for multiple centuries in a realistic configuration with time-dependent forcing while maintaining stability and accuracy 
-
-✅ Fast: it is 🚅150 times faster🚅 than its original counterpart 
-
-✅ Open: Samudra is available on Hugging Face. Anyone can now run a global ocean emulator! 
+- Reliable ✅ : Capable of reproducing the temperature structure and variability of a realistic 3D ocean climate model
+- Stable ✅ : run for multiple centuries in a realistic configuration with time-dependent forcing while maintaining stability and accuracy 
+- Fast ✅ : it is 🚅150 times faster🚅 than its original counterpart 
+- Open ✅ : Samudra is available on Hugging Face. Anyone can now run a global ocean emulator! 
 
 <p align="center">
   <img src="/assets/enso.gif" >
@@ -25,8 +19,17 @@ This repository contains the code of the Samudra Ocean Emulator described in the
 
 ### Getting Started
 1. Clone this repository. 
+```bash
+git clone https://github.com/m2lines/Samudra.git
+cd Samudra
+```
 2. Create a new conda environment using the `environment.yml` file.
-3. Run the notebook `samudra_rollout.ipynb` to see how to generate a rollout with trained model weights.
+```bash
+conda env create -f environment.yml
+```
+3. Run the notebook `samudra_rollout.ipynb` to generate a rollout with trained model weights.
+
+Notebooks `samudra_plotting.ipynb` and `samudra_plotting_multiseed.ipynb` contain the code to generate the plots in the paper using a generated rollout.
 
 ### Model Weights and Data
 The model weights are currently hosted on huggingface and can be downloaded from [here](https://huggingface.co/M2LInES/Samudra). The OM4 data used for training and testing the models in the paper can be accessed using: 
