@@ -5,6 +5,9 @@ This repository contains the code of the Samudra Ocean Emulator described in the
   <img src="/assets/globe.gif" >
 </p>
 
+### TODO
+- [ ] Fix environment.yml
+- [ ] Training code
 
 ### Key features
 
@@ -20,28 +23,20 @@ This repository contains the code of the Samudra Ocean Emulator described in the
   <img src="/assets/enso.gif" >
 </p>
 
-## TODO
-
-- [ ] Using HuggingFace data is currently very slow to generate a rollout, need a better method.
-- [x] Add # Samudra content 
-- [ ] Add visual aids (Rollout Video / Model arch fig), maybe https://drive.google.com/file/d/1S0rA0pUZWi4B0YlNztiLKCwRhGrBcbIX/view?resourcekey
-- [ ] Fix environment.yml
-- [x] Fix citation
-- [ ] Code refactor / cleanup (?)
-- [ ] HuggingFace ReadMEs
-- [ ] Training code
-
-
 ### Getting Started
 1. Clone this repository. 
 2. Create a new conda environment using the `environment.yml` file.
 3. Run the notebook `samudra_rollout.ipynb` to see how to generate a rollout with trained model weights.
 
-### Model Weights
-The model weights can be downloaded from [here](https://huggingface.co/M2LInES/Samudra).
+### Model Weights and Data
+The model weights are currently hosted on huggingface and can be downloaded from [here](https://huggingface.co/M2LInES/Samudra). The OM4 data used for training and testing the models in the paper can be accessed using: 
 
-### Data
-The data used in the paper can be downloaded from [here](https://huggingface.co/datasets/M2LInES/Samudra_OM4). See the paper for more details on the data.
+```python
+import xarray as xr
+data = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4", engine='zarr', chunks={})
+```
+
+For more details on the data and the model, please refer to the paper.
 
 ### Citing
 If you use this code in your research, please consider citing the following paper:
