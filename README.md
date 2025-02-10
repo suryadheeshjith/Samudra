@@ -27,6 +27,12 @@ cd Samudra
 ```bash
 conda env create -f environment.yml
 ```
+Alternatively, create a new python environment with [`uv`](https://docs.astral.sh/uv/):
+```bash
+uv sync
+source .venv/bin/activate
+```
+
 3. Run the notebook `samudra_rollout.ipynb` to generate a rollout with trained model weights.
 
 Notebooks `samudra_plotting.ipynb` and `samudra_plotting_multiseed.ipynb` contain the code to generate the plots in the paper using a generated rollout.
