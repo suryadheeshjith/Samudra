@@ -1,3 +1,5 @@
+This repository is set to be read-only. Any issues or PRs can be made [here](https://github.com/suryadheeshjith/Samudra/tree/main).
+
 # Samudra 🌊
 This repository contains the code of the Samudra Ocean Emulator described in the paper ["Samudra: An AI Global Ocean Emulator for Climate"](https://arxiv.org/abs/2412.03795). Samudra is a skillful global emulator of the ocean component of a state-of-the-art climate model. We emulate key ocean variables, sea surface height, horizontal velocities, temperature, and salinity, across their full depth. 
 
