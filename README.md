@@ -19,10 +19,6 @@ This repository contains the code of the Samudra Ocean Emulator described in the
 
 ### Getting Started
 1. Clone this repository. 
-```bash
-git clone https://github.com/m2lines/Samudra.git
-cd Samudra
-```
 2. Create a new conda environment using the `environment.yml` file.
 ```bash
 conda env create -f environment.yml
