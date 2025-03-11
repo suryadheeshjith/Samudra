@@ -10,6 +10,7 @@ dependencies:
     - matplotlib==3.8.3
     - xarray==2023.7.0
     - zarr==2.16.1
+    - ipykernel==6.29.3
     - cartopy==0.23.0
     - xarrayutils==2.0.1
     - dacite==1.9.1
