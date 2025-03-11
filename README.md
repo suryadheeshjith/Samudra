@@ -71,24 +71,19 @@ stds = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_std
 stds.to_zarr("local/path/to/data-dir/stds.zarr")
 ```
 
-Downloading the entire dataset (~70 GB) can be time-consuming, depending on your network speed. If you only need to run Samudra on the test set, a reduced dataset (~12 GB) is sufficient.
+Downloading the entire dataset (~70 GB) can be time-consuming, depending on your network speed. If you only need to evaluate Samudra on the test set, a reduced dataset (~12 GB) is sufficient.
 
-### For Training
 ```python
 import xarray as xr
 
 # Download the entire data
 data = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4", engine='zarr', chunks={})
-data.to_zarr("local/path/to/data-dir/data.zarr") # NOTE: This will take a while to download
-```
 
-### For Rollout
-```python
-import xarray as xr
+# For training ~ 70GB
+data.to_zarr("local/path/to/data-dir/data.zarr")
 
-# Download test portion of the data
-data = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4", engine='zarr', chunks={})
-data.sel(time=slice("2014-10-10", "2022-12-24")).to_zarr("local/path/to/data-dir/data.zarr") # NOTE: This will take a while to download
+# (OR) For evaluation ~ 12GB
+data.sel(time=slice("2014-10-10", "2022-12-24")).to_zarr("local/path/to/data-dir/data.zarr")
 ```
 
 ## Trained Model Weights
