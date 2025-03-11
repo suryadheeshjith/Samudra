@@ -33,7 +33,7 @@ experiment:
   name: train
   sub_name: om4_samudra
   rand_seed: 5
-  base_output_dir: .LOCAL
+  base_output_dir: train
   data_dir: /pscratch/sd/s/suryad/data
   network: samudra
   prognostic_vars_key: thermo_dynamic # thermo_dynamic or thermo
