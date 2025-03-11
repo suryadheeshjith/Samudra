@@ -63,6 +63,8 @@ python src/rollout.py --config path/to/rollout_config.yaml --ckpt_path path/to/c
 The OM4 data and corresponding statistics are publicly available as Zarr files via our hosted pod.
 
 ```python
+import xarray as xr
+
 # Download statistics
 means = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_means", engine='zarr', chunks={})
 means.to_zarr("local/path/to/data-dir/means.zarr")
