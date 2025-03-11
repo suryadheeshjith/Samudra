@@ -1,0 +1,27 @@
+[project]
+name = "samudra"
+version = "0.1.0"
+description = "Samudra: An AI Global Ocean Emulator for Climate"
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+classifiers = [ "Programming Language :: Python :: 3 :: Only", "Programming Language :: Python :: 3.10" ]
+dependencies = [
+  "aiohttp>=3.9.3",
+  "cartopy>=0.23",
+  "cftime>=1.5.2",
+  "cmocean>=4.0.3",
+  "dask>=2024.2.1",
+  "einops>=0.8",
+  "huggingface-hub==0.23.4",
+  "ipywidgets>=8.1.2",
+  "matplotlib>=3.8.3",
+  "nc-time-axis>=1.4.1",
+  "numpy>=1.24.4",
+  "pandas>=2.2.1",
+  "requests>=2.32.3",
+  "scikit-learn>=1.4.1.post1",
+  "torch==2.2.1",
+  "xarray>=2023.7",
+  "xarrayutils>=2.0.1",
+  "zarr>=2,<3",
+]
