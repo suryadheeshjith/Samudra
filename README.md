@@ -41,17 +41,27 @@ source .venv/bin/activate
 
 ## Usage
 
-After activating the environment, you can run the following commands to train and produce a rollout:
+To train or rollout Samudra, you can download the OM4 data and statistics from the [Training Data](#training-data) section. Optionally, you could use your own data ensuring the data is in the same format as the OM4 data. The mean and standard deviation files are pre-computed for training and rollout, so you will need to compute them yourself if you use your own data.
 
+You can also rollout the model using our trained model weights specified in the [Trained Model Weights](#trained-model-weights) section.
+
+### Training
+Start with the train_samudra_om4.yaml in the `configs` folder to train the model. You will need to update the fields that have `# FILL IN` with the correct paths to the base data directory and file names for the data and statistics.
+
+> Make sure your environment is activated!
 ```bash
 # Train a new model
 python src/train.py --config path/to/train_config.yaml
+```
 
+### Rollout
+Start with the rollout_samudra_om4.yaml in the `configs` folder to rollout the model. You will need to update the fields that have `# FILL IN` with the correct paths to the base data directory and file names for the data and statistics.
+
+> Make sure your environment is activated!
+```bash
 # Produce a rollout from a trained model (and optionally save zarr)
 python src/rollout.py --config path/to/rollout_config.yaml --ckpt_path path/to/checkpoint.pt --save_zarr
 ```
-
-Default configurations for training and rollout are provided in the `configs` folder.
 
 ## Training Data
 The OM4 data can be downloaded from our publicly hosted pod:
