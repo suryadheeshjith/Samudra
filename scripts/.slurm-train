@@ -15,9 +15,9 @@
 
 set -e
 
-# Load conda environment
-module load conda
-conda activate emulator
+# Load environment
+# conda activate samudra
+# (or) source .venv/bin/activate
 
 # Set master node information
 export MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)

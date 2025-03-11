@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Run evaluation with this script
+
 # Assumes you have activated the environment
 # for example: conda activate emulator
 

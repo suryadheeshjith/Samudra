@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Debug training with this script
+
 # Assumes you have activated the environment
 # for example: conda activate emulator
 
