@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Assumes you have activated the environment
+# for example: conda activate emulator
+
+CONFIG_PATH=configs/train_samudra_om4.yaml
+
+echo 'Running local training'
+echo 'Using config file:' $CONFIG_PATH
+
+torchrun src/train.py --config $CONFIG_PATH --subname "samudra-om4-thermo-dynamic"

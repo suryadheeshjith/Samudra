@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Assumes you have activated the environment
+# for example: conda activate emulator
+
+CONFIG_PATH=configs/eval_samudra_om4.yaml
+
+echo 'Running local training'
+echo 'Using config file:' $CONFIG_PATH
+
+python3 src/eval.py \
+    --config $CONFIG_PATH \
+    --ckpt_path /pscratch/sd/s/suryad/Ocean_Emulator/.LOCAL/2025-03-10-train-samudra-om4-thermo-dynamic/saved_nets/best_inference_ckpt.pt \
+    --subname "thermo-om4-hfdsanom-2014-2022" \
+    --save_zarr

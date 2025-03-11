@@ -1,0 +1,46 @@
+debug: false
+save_zarr: true
+disk_mode: true
+inference:
+  start_time: "2014-09-30"
+  end_time: "2014-10-30" # "2022-12-24"
+ckpt_path: /path/here/or/fill/in/script # Fill in script
+num_model_steps_forward: 20 # Number of steps to run forward pass at a time
+record_every: 10 # Write to zarr every record_every steps (if save_zarr is true)
+
+experiment:
+  name: eval
+  sub_name: local_om4_samudra
+  rand_seed: 15
+  base_output_dir: .LOCAL
+  data_dir: /pscratch/sd/s/suryad/data
+  network: samudra
+  prognostic_vars_key: thermo_dynamic # thermo_dynamic or thermo
+  boundary_vars_key: hfds_anom
+
+data:
+  data_path: 3D_data_OM4_5daily_v0.2.1_with_hfds_anomalies # 3D_data_OM4_5daily_v0.2.1_with_hfds_anom_104_years_2014_netzerohfds_detrended # 3D_data_OM4_5daily_v0.2.1_with_hfds_anom_100_years_1990_netzerohfds
+  data_means_path: 3D_data_OM4_5daily_v0.2.1_with_hfds_anomalies_means
+  data_stds_path: 3D_data_OM4_5daily_v0.2.1_with_hfds_anomalies_stds
+  time_delta: 5
+  num_workers: 4
+  hist: 1
+
+
+unet:
+  ch_width: [158, 200, 250, 300, 400]
+  n_out: 154
+  dilation: [1, 2, 4, 8]
+  n_layers: [1, 1, 1, 1]
+  last_kernel_size: 3
+  pad: "circular"
+
+  core_block:
+    block_type: "conv_next_block"
+    kernel_size: 3
+    activation: "capped_gelu"
+    upscale_factor: 4
+    norm: "batch"
+
+  down_sampling_block: "avg_pool"
+  up_sampling_block: "bilinear_upsample"

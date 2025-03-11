@@ -1,0 +1,37 @@
+#!/bin/bash
+#SBATCH --job-name=samudra-cm4-with-om4-configs-thermodynamic-seed15
+#SBATCH --output=train_3D/logs/slurm-%j.out
+#SBATCH --error=train_3D/logs/slurm-%j.err
+#SBATCH --constraint=gpu&hbm80g
+#SBATCH --account=m4874
+#SBATCH --qos=regular
+#SBATCH --mem=110G
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=2
+#SBATCH --cpus-per-task=32
+#SBATCH --gpus-per-task=1
+#SBATCH --gpu-bind=none     # This ensures all GPUs are visible to all tasks
+#SBATCH --time=38:00:00
+
+set -e
+
+# Load conda environment
+module load conda
+conda activate emulator
+
+# Set master node information
+export MASTER_ADDR=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
+export MASTER_PORT=29400
+
+# Debug info
+echo "MASTER_ADDR: $MASTER_ADDR"
+echo "MASTER_PORT: $MASTER_PORT"
+echo "SLURM_JOB_NODELIST: $SLURM_JOB_NODELIST"
+echo "SLURM_NTASKS_PER_NODE: $SLURM_NTASKS_PER_NODE"
+echo "SLURM_NNODES: $SLURM_NNODES"
+
+# Run the training script
+srun --cpu-bind=cores \
+     python src/train_3D.py \
+     --config configs/slurm_perlmutter_train_cm4_with_om4configs.yaml \
+     --subname $SLURM_JOB_NAME
