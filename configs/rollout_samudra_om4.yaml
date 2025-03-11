@@ -3,7 +3,7 @@ save_zarr: true
 disk_mode: true
 inference:
   start_time: "2014-09-30"
-  end_time: "2014-10-30" # "2022-12-24"
+  end_time: "2022-12-24"
 ckpt_path: local/path/to/ckpt # FILL IN
 num_model_steps_forward: 20 # Number of steps to run forward pass at a time
 record_every: 10 # Write to zarr every record_every steps (if save_zarr is true)
