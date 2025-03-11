@@ -27,7 +27,7 @@ cd Samudra
 ```bash
 conda env create -f environment.yml
 ```
-Alternatively, create a new python environment with [`uv`](https://docs.astral.sh/uv/):
+Alternatively, create a new python environment with [`uv`](https://docs.astral.sh/uv/): [Preferred Method]
 ```bash
 uv sync
 source .venv/bin/activate
