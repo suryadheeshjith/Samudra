@@ -12,6 +12,7 @@ dependencies:
     - zarr==2.16.1
     - cartopy==0.23.0
     - xarrayutils==2.0.1
+    - dacite==1.9.1
     - dask==2024.2.1
     - pandas==2.2.1
     - cmocean==4.0.3
