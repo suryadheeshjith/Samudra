@@ -10,7 +10,7 @@ CONFIG_PATH=configs/eval_samudra_om4.yaml
 echo 'Running local training'
 echo 'Using config file:' $CONFIG_PATH
 
-python3 src/eval.py \
+python3 src/rollout.py \
     --config $CONFIG_PATH \
     --ckpt_path /pscratch/sd/s/suryad/Samudra/.LOCAL/2025-03-11-train-samudra-om4-thermo-dynamic/saved_nets/best_inference_ckpt.pt \
     --subname "samudrao-om4-thermo-dynamic-2014-2022" \
