@@ -8,7 +8,7 @@ This repository contains the implementation of Samudra, a global ocean emulator 
 
 ## Overview
 
-Samudra demonstrates high-fidelity reproduction of the 3D ocean temperature structure and variability from a realistic climate model (OM4) and long-term stability under realistic time-dependent forcing conditions. Rolling out a 100-year simulation with Samudra is 150x faster than the original model.
+Samudra reproduces the 3D ocean temperature structure and variability of the OM4 climate model with high fidelity, while also demonstrating stable long-term performance under realistic, time-varying forcing conditions. It achieves a significant speedup as well—rolling out a 100-year simulation is approximately 150 times faster than the original model.
 
 <p align="center">
   <img src="/assets/enso.gif" >
