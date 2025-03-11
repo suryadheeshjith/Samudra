@@ -92,11 +92,13 @@ data.sel(time=slice("2014-10-10", "2022-12-24")).to_zarr("local/path/to/data-dir
 Pre-trained weights for Samudra are available on [Hugging Face](https://huggingface.co/M2LInES/Samudra). You can download them as follows:
 ```bash
 # Download the weights for thermo model
-wget https://huggingface.co/M2LInES/Samudra/blob/main/samudra_thermo_seed1.pt
+wget https://huggingface.co/M2LInES/Samudra/resolve/main/samudra_thermo_seed1.pt
 
 # (OR) Download the weights for thermo-dynamic model
-wget https://huggingface.co/M2LInES/Samudra/blob/main/samudra_thermo_dynamic_seed1.pt
+wget https://huggingface.co/M2LInES/Samudra/resolve/main/samudra_thermo_dynamic_seed1.pt
 ```
+
+There are 5 seeds saved for each model.
 
 ## Paper Plots
 The notebooks in the `notebooks` folder reproduce the plots from the paper.
