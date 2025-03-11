@@ -8,11 +8,7 @@ This repository contains the implementation of Samudra, a global ocean emulator 
 
 ## Overview
 
-Samudra demonstrates:
-- Capable of reproducing the temperature structure and variability of a realistic 3D ocean climate model
-- Long-term stability under realistic time-dependent forcing conditions
-- Performance improvement of ~150x compared to the original model
-- Public availability via Hugging Face
+Samudra demonstrates high-fidelity reproduction of the 3D ocean temperature structure and variability from a realistic climate model (OM4) and long-term stability under realistic time-dependent forcing conditions. Rolling out a 100-year simulation with Samudra is 150x faster than the original model.
 
 <p align="center">
   <img src="/assets/enso.gif" >
@@ -41,51 +37,62 @@ source .venv/bin/activate
 
 ## Usage
 
-To train or rollout Samudra, you can download the OM4 data and statistics from the [Training Data](#training-data) section. Optionally, you could use your own data ensuring the data is in the same format as the OM4 data. The mean and standard deviation files are pre-computed for training and rollout, so you will need to compute them yourself if you use your own data.
+To train or rollout Samudra, download the OM4 data and statistics referenced in the [Training Data](#training-data) section. You can also substitute your own data, provided it aligns with the same format. Note that mean and standard deviation files are precomputed for training and model rollouts; if you opt to use your own data, you will need to compute these statistics yourself.
 
-You can also rollout the model using our trained model weights specified in the [Trained Model Weights](#trained-model-weights) section.
+Should you wish to evaluate Samudra directly, you may use the pre-trained model weights discussed in the [Trained Model Weights](#trained-model-weights) section.
 
 ### Training
-Start with the train_samudra_om4.yaml in the `configs` folder to train the model. You will need to update the fields that have `# FILL IN` with the correct paths to the base data directory and file names for the data and statistics.
+A default training configuration is provided in the file configs/train_samudra_om4.yaml. Update all fields marked with # FILL IN to reference your local data paths and files for OM4 data and statistics.
 
-> Make sure your environment is activated!
+> Note: Ensure your environment is activated before training.
 ```bash
 # Train a new model
 python src/train.py --config path/to/train_config.yaml
 ```
 
 ### Rollout
-Start with the rollout_samudra_om4.yaml in the `configs` folder to rollout the model. You will need to update the fields that have `# FILL IN` with the correct paths to the base data directory and file names for the data and statistics.
+A default rollout configuration is provided in configs/rollout_samudra_om4.yaml. Update all fields marked with # FILL IN to reference your local data paths and files for OM4 data and statistics.
 
-> Make sure your environment is activated!
+> Note: Ensure your environment is activated before training.
 ```bash
-# Produce a rollout from a trained model (and optionally save zarr)
+# Produce a rollout from a trained model (and optionally save the result)
 python src/rollout.py --config path/to/rollout_config.yaml --ckpt_path path/to/checkpoint.pt --save_zarr
 ```
 
 ## Training Data
-The OM4 data can be downloaded from our publicly hosted pod:
+The OM4 data and corresponding statistics are publicly available as Zarr files via our hosted pod.
 
+```python
+# Download statistics
+means = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_means", engine='zarr', chunks={})
+means.to_zarr("local/path/to/data-dir/means.zarr")
+
+stds = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_stds", engine='zarr', chunks={})
+stds.to_zarr("local/path/to/data-dir/stds.zarr")
+```
+
+Downloading the entire dataset (~70 GB) can be time-consuming, depending on your network speed. If you only need to run Samudra on the test set, a reduced dataset (~12 GB) is sufficient.
+
+### For Training
 ```python
 import xarray as xr
 
-# Download the data
+# Download the entire data
 data = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4", engine='zarr', chunks={})
-data.to_zarr("local/path/to/data.zarr")
-
-# Download statistics
-means = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_means", engine='zarr', chunks={})
-means.to_zarr("local/path/to/means.zarr")
-
-stds = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_stds", engine='zarr', chunks={})
-stds.to_zarr("local/path/to/stds.zarr")
+data.to_zarr("local/path/to/data-dir/data.zarr") # NOTE: This will take a while to download
 ```
 
-Now you can train / rollout and be sure to update the corresponding config file with the correct paths to the data and statistics.
+### For Rollout
+```python
+import xarray as xr
+
+# Download test portion of the data
+data = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4", engine='zarr', chunks={})
+data.sel(time=slice("2014-10-10", "2022-12-24")).to_zarr("local/path/to/data-dir/data.zarr") # NOTE: This will take a while to download
+```
 
 ## Trained Model Weights
-If you want to use our trained model, download the weights from [Hugging Face](https://huggingface.co/M2LInES/Samudra).
-
+Pre-trained weights for Samudra are available on [Hugging Face](https://huggingface.co/M2LInES/Samudra). You can download them as follows:
 ```bash
 # Download the weights for thermo model
 wget https://huggingface.co/M2LInES/Samudra/blob/main/samudra_thermo_seed1.pt
@@ -95,11 +102,11 @@ wget https://huggingface.co/M2LInES/Samudra/blob/main/samudra_thermo_dynamic_see
 ```
 
 
-For detailed methodology and model architecture, please refer to the [paper](https://arxiv.org/abs/2412.03795).
+Further methodological details and model architecture specifications can be found in the [paper](https://arxiv.org/abs/2412.03795).
 
 ## Citation
 
-If you use this code in your research, please cite:
+If you find this code useful in your research, please cite:
 ```
 @article{dheeshjith2024samudra,
   title={Samudra: An AI Global Ocean Emulator for Climate},

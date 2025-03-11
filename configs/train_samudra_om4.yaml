@@ -34,14 +34,14 @@ experiment:
   sub_name: om4_samudra
   rand_seed: 5
   base_output_dir: train
-  data_dir: /path/to/data/dir # FILL IN
+  data_dir: local/path/to/data-dir # FILL IN
   network: samudra
   prognostic_vars_key: thermo_dynamic # thermo_dynamic or thermo
   boundary_vars_key: hfds_anom
 data:
-  data_path: DATA_FILE_NAME # FILL IN
-  data_means_path: DATA_MEANS_FILE_NAME # FILL IN
-  data_stds_path: DATA_STDS_FILE_NAME # FILL IN
+  data_path: data.zarr # FILL IN
+  data_means_path: means.zarr # FILL IN
+  data_stds_path: stds.zarr # FILL IN
   time_delta: 5
   num_workers: 4
   hist: 1
