@@ -103,7 +103,7 @@ wget https://huggingface.co/M2LInES/Samudra/resolve/main/samudra_thermo_dynamic_
 There are 5 seeds saved for each model.
 
 ## Paper Plots
-The notebooks in the `notebooks` folder reproduce the plots from the paper.
+The notebooks in the `notebooks` folder reproduce most of the plots from the paper.
 
 Further methodological details and model architecture specifications can be found in the [paper](https://arxiv.org/abs/2412.03795).
 
