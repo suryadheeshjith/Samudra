@@ -223,7 +223,8 @@ class Trainer:
     def init_inference_stores(self):
         # Determine number of processes based on device
         if using_gpu():
-            num_splits = get_world_size()
+            world_size = get_world_size()
+            num_splits = min(world_size, len(self.inference_times))
         else:
             num_splits = 1
 
