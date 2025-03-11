@@ -4,7 +4,7 @@ disk_mode: true
 inference:
   start_time: "2014-09-30"
   end_time: "2014-10-30" # "2022-12-24"
-ckpt_path: /path/here/or/fill/in/script # Fill in script
+ckpt_path: /path/to/ckpt # or Fill in script
 num_model_steps_forward: 20 # Number of steps to run forward pass at a time
 record_every: 10 # Write to zarr every record_every steps (if save_zarr is true)
 
@@ -13,15 +13,15 @@ experiment:
   sub_name: om4_samudra
   rand_seed: 5
   base_output_dir: eval
-  data_dir: /pscratch/sd/s/suryad/data
+  data_dir: /path/to/data/dir # FILL IN
   network: samudra
   prognostic_vars_key: thermo_dynamic # thermo_dynamic or thermo
   boundary_vars_key: hfds_anom
 
 data:
-  data_path: 3D_data_OM4_5daily_v0.2.1_with_hfds_anomalies # 3D_data_OM4_5daily_v0.2.1_with_hfds_anom_104_years_2014_netzerohfds_detrended # 3D_data_OM4_5daily_v0.2.1_with_hfds_anom_100_years_1990_netzerohfds
-  data_means_path: 3D_data_OM4_5daily_v0.2.1_with_hfds_anomalies_means
-  data_stds_path: 3D_data_OM4_5daily_v0.2.1_with_hfds_anomalies_stds
+  data_path: DATA_FILE_NAME # FILL IN
+  data_means_path: DATA_MEANS_FILE_NAME # FILL IN
+  data_stds_path: DATA_STDS_FILE_NAME # FILL IN
   time_delta: 5
   num_workers: 4
   hist: 1
