@@ -9,6 +9,7 @@ version = "0.1.0"
 description = "Samudra: An AI Global Ocean Emulator for Climate"
 readme = "README.md"
 keywords = [ "climate", "emulation", "machine learning", "ocean" ]
+authors = [ { name = "Surya Dheeshjith", email = "sd5313@nyu.edu" } ]
 requires-python = ">=3.10,<3.11"
 classifiers = [
   "License :: OSI Approved :: Apache Software License",
