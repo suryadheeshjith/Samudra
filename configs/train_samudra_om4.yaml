@@ -10,7 +10,7 @@ loss: mse
 inference_epochs: [-1] # Perform inference at every epoch
 train:
   start_time: "1975-01-03"
-  end_time: "1976-01-03" # "2014-01-13"
+  end_time: "2014-01-13"
 val:
   start_time: "2014-01-18"
   end_time: "2014-09-20"
