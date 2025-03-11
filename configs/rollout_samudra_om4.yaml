@@ -9,10 +9,10 @@ num_model_steps_forward: 20 # Number of steps to run forward pass at a time
 record_every: 10 # Write to zarr every record_every steps (if save_zarr is true)
 
 experiment:
-  name: eval
+  name: rollout
   sub_name: om4_samudra
   rand_seed: 5
-  base_output_dir: eval
+  base_output_dir: rollout
   data_dir: local/path/to/data-dir # FILL IN
   network: samudra
   prognostic_vars_key: thermo_dynamic # thermo_dynamic or thermo

@@ -19,7 +19,7 @@ from utils.distributed import set_seed
 from utils.logging import handle_logging, handle_warnings
 
 
-class Eval:
+class Rollout:
     def __init__(self, cfg) -> None:
         self.device = get_device()
 
@@ -133,7 +133,7 @@ class Eval:
 
         self.network = cfg.experiment.network
 
-        # Eval
+        # Rollout
         self.hist = cfg.data.hist
         self.output_dir = cfg.experiment.output_dir
         self.network = cfg.experiment.network
@@ -170,7 +170,7 @@ class Eval:
         self.standalone_inference()
         total_time = time.time() - start_time
         total_time_str = str(datetime.timedelta(seconds=int(total_time)))
-        logging.info(f"Eval time {total_time_str}")
+        logging.info(f"Rollout time {total_time_str}")
 
     @torch.no_grad()
     def standalone_inference(self):
@@ -219,7 +219,7 @@ def main():
     handle_logging(cfg)
     handle_warnings()
 
-    Evaluator = Eval(cfg)
+    Evaluator = Rollout(cfg)
     try:
         Evaluator.run()
     except Exception as e:

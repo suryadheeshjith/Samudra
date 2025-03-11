@@ -7,7 +7,7 @@ outputs
 *.png
 .LOCAL
 train
-eval
+rollout
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

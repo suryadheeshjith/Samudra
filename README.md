@@ -59,6 +59,8 @@ A default rollout configuration is provided in configs/rollout_samudra_om4.yaml.
 python src/rollout.py --config path/to/rollout_config.yaml --ckpt_path path/to/checkpoint.pt --save_zarr
 ```
 
+> Note: For both training and rollout, you may change the experiment name in the config files or use `--sub_name` argument in the command line to specify a different name for the output directory.
+
 ## OM4 Data
 The OM4 data and corresponding statistics are publicly available as Zarr files via our hosted pod.
 
