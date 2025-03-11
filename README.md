@@ -37,7 +37,7 @@ source .venv/bin/activate
 
 ## Usage
 
-To train or rollout Samudra, download the OM4 data and statistics referenced in the [Training Data](#training-data) section. You can also substitute your own data, provided it aligns with the same format. Note that mean and standard deviation files are precomputed for training and model rollouts; if you opt to use your own data, you will need to compute these statistics yourself.
+To train or rollout Samudra, download the OM4 data and statistics referenced in the [OM4 Data](#om4-data) section. You can also substitute your own data, provided it aligns with the same format. Note that mean and standard deviation files are precomputed for training and model rollouts; if you opt to use your own data, you will need to compute these statistics yourself.
 
 Should you wish to evaluate Samudra directly, you may use the pre-trained model weights discussed in the [Trained Model Weights](#trained-model-weights) section.
 
@@ -59,7 +59,7 @@ A default rollout configuration is provided in configs/rollout_samudra_om4.yaml.
 python src/rollout.py --config path/to/rollout_config.yaml --ckpt_path path/to/checkpoint.pt --save_zarr
 ```
 
-## Training Data
+## OM4 Data
 The OM4 data and corresponding statistics are publicly available as Zarr files via our hosted pod.
 
 ```python
@@ -101,6 +101,8 @@ wget https://huggingface.co/M2LInES/Samudra/blob/main/samudra_thermo_seed1.pt
 wget https://huggingface.co/M2LInES/Samudra/blob/main/samudra_thermo_dynamic_seed1.pt
 ```
 
+## Paper Plots
+The notebooks in the `notebooks` folder reproduce the plots from the paper.
 
 Further methodological details and model architecture specifications can be found in the [paper](https://arxiv.org/abs/2412.03795).
 
