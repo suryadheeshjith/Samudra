@@ -88,9 +88,12 @@ class Trainer:
         )
 
         logging.info(
-            f"Number of inputs: hist * prognostic_vars + boundary_vars = {self.num_in}"
+            f"Number of inputs: (hist + 1) * prognostic_vars + boundary_vars "
+            f"= {self.num_in}"
         )
-        logging.info(f"Number of outputs: hist * prognostic_vars = {self.num_out}")
+        logging.info(
+            f"Number of outputs: (hist + 1) * prognostic_vars = {self.num_out}"
+        )
 
         assert isinstance(cfg.data_stride, list)
         assert isinstance(cfg.steps, list)
