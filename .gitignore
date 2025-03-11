@@ -5,6 +5,7 @@ upload_huggingface.ipynb
 *.zarr
 outputs
 *.png
+.LOCAL
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=samudra-cm4-with-om4-configs-thermodynamic-seed15
+#SBATCH --job-name=samudra-om4-thermo-dynamic-seed5
 #SBATCH --output=train_3D/logs/slurm-%j.out
 #SBATCH --error=train_3D/logs/slurm-%j.err
 #SBATCH --constraint=gpu&hbm80g
@@ -33,5 +33,5 @@ echo "SLURM_NNODES: $SLURM_NNODES"
 # Run the training script
 srun --cpu-bind=cores \
      python src/train_3D.py \
-     --config configs/slurm_perlmutter_train_cm4_with_om4configs.yaml \
+     --config configs/train_samudra_om4.yaml \
      --subname $SLURM_JOB_NAME

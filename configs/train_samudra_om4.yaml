@@ -31,8 +31,8 @@ distributed:
 
 experiment:
   name: train
-  sub_name: local_om4_samudra
-  rand_seed: 15
+  sub_name: om4_samudra
+  rand_seed: 5
   base_output_dir: .LOCAL
   data_dir: /pscratch/sd/s/suryad/data
   network: samudra
