@@ -5,6 +5,9 @@ upload_huggingface.ipynb
 *.zarr
 outputs
 *.png
+.LOCAL
+train
+rollout
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -132,3 +135,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# uv
+uv.lock
+
+# JetBrains
+.idea

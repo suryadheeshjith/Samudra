@@ -1,0 +1,52 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+
+requires = [ "setuptools", "wheel" ]
+
+[project]
+name = "samudra"
+version = "0.1.0"
+description = "Samudra: An AI Global Ocean Emulator for Climate"
+readme = "README.md"
+keywords = [ "climate", "emulation", "machine learning", "ocean" ]
+authors = [ { name = "Surya Dheeshjith", email = "sd5313@nyu.edu" } ]
+requires-python = ">=3.10,<3.11"
+classifiers = [
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+  "aiohttp==3.9.3",
+  "cartopy==0.23",
+  "cftime>=1.5.2",
+  "cmocean==4.0.3",
+  "dacite==1.9.1",
+  "dask==2024.2.1",
+  "einops==0.8",
+  "huggingface-hub==0.23.4",
+  "ipykernel==6.29.3",
+  "ipywidgets==8.1.2",
+  "matplotlib==3.8.3",
+  "nc-time-axis==1.4.1",
+  "numpy==1.24.4",
+  "pandas==2.2.1",
+  "requests==2.32.3",
+  "scikit-learn==1.4.1.post1",
+  "torch==2.2.1",
+  "xarray==2023.7",
+  "xarrayutils==2.0.1",
+  "zarr==2.16.1",
+]
+
+[tool.ruff]
+lint.select = [ "D", "E", "F", "I", "W" ]
+lint.ignore = [ "D1", "D200", "D205", "D212", "E203", "E402", "F541", "W293" ]
+lint.per-file-ignores."*/__init__.py" = [ "F401" ]
+lint.per-file-ignores."scripts/*" = [ "D" ]
+lint.isort.split-on-trailing-comma = false
+lint.pydocstyle.convention = "google"
+
+[tool.mypy]
+ignore_missing_imports = true
+check_untyped_defs = true
