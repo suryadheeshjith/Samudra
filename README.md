@@ -27,6 +27,7 @@ cd Samudra
 Using conda:
 ```bash
 conda env create -f environment.yml
+conda activate samudra
 ```
 
 Using [`uv`](https://docs.astral.sh/uv/):
@@ -47,7 +48,7 @@ A default training configuration is provided in the file configs/train_samudra_o
 > Note: Ensure your environment is activated before training.
 ```bash
 # Train a new model
-python src/train.py --config path/to/train_config.yaml
+torchrun src/train.py --config path/to/train_config.yaml
 ```
 
 ### Rollout
