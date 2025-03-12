@@ -132,3 +132,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# uv
+uv.lock
+
+# JetBrains
+.idea
