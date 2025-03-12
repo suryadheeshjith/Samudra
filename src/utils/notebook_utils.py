@@ -163,7 +163,8 @@ def process_data(data, pred_dict):
             )
 
         assert ds_prediction.time.size == ds_groundtruth.time.size, (
-            f"Sizes different for {key}: {ds_prediction.time.size}!={ds_groundtruth.time.size}"
+            f"Sizes different for {key}: {ds_prediction.time.size}!="
+            f"{ds_groundtruth.time.size}"
         )
         if "model_path" in ds_prediction.attrs:
             copy_dict[key]["model_path"] = ds_prediction.attrs["model_path"]
