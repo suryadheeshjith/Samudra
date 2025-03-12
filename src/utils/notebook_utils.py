@@ -2,6 +2,8 @@ from copy import deepcopy
 
 import xarray as xr
 
+from utils.data import rename_vars
+
 
 def _combine_variables_by_level(ds, lev, combine_vars):
     """
@@ -136,53 +138,12 @@ def postprocess_for_plot(ds_groundtruth, areacello, dz, pred_dict):
     return ds_groundtruth, pred_dict
 
 
-def convert_train_data(ds):
-    # Recreate the 'lev' coordinate from the variable names
-    lev_values = ds["lev"].values
-
-    # Create an empty dictionary to store the data for each variable
-    reconstructed_vars: dict[str, list] = {"vo": [], "thetao": [], "uo": [], "so": []}
-
-    # Iterate over the levels and append data to each reconstructed variable
-    for lev in lev_values:
-        lev_str = str(lev).replace(".", "_")
-
-        reconstructed_vars["vo"].append(
-            ds[f"vo_lev_{lev_str}"].expand_dims(dim={"lev": [lev]})
-        )
-        reconstructed_vars["thetao"].append(
-            ds[f"thetao_lev_{lev_str}"].expand_dims(dim={"lev": [lev]})
-        )
-        reconstructed_vars["uo"].append(
-            ds[f"uo_lev_{lev_str}"].expand_dims(dim={"lev": [lev]})
-        )
-        reconstructed_vars["so"].append(
-            ds[f"so_lev_{lev_str}"].expand_dims(dim={"lev": [lev]})
-        )
-
-    # Concatenate along the 'lev' dimension
-    for var_name in reconstructed_vars:
-        ds[var_name] = xr.concat(reconstructed_vars[var_name], dim="lev")
-
-    # Drop the individual lev variables
-    vars_to_drop = [
-        var
-        for var in ds.data_vars
-        if any(
-            var.startswith(prefix)
-            for prefix in ["vo_lev_", "thetao_lev_", "uo_lev_", "so_lev_"]
-        )
-    ]
-    ds = ds.drop_vars(vars_to_drop)
-
-    return ds
-
-
 def process_data(data, pred_dict):
     """
     Get plot ready OM4 data.
     """
-    ds_groundtruth = convert_train_data(data)
+    ds_groundtruth = rename_vars(data)
+
     # Renames so further processing is easier
     ds_groundtruth = ds_groundtruth.rename({"lat": "lat_t", "lon": "lon_t"})
     ds_groundtruth = ds_groundtruth.rename({"y": "lat", "x": "lon"})
@@ -201,9 +162,10 @@ def process_data(data, pred_dict):
                 ds_prediction.time.size,
             )
 
-        assert (
-            ds_prediction.time.size == ds_groundtruth.time.size
-        ), f"Sizes different for {key}: {ds_prediction.time.size}!={ds_groundtruth.time.size}"
+        assert ds_prediction.time.size == ds_groundtruth.time.size, (
+            f"Sizes different for {key}: {ds_prediction.time.size}!="
+            f"{ds_groundtruth.time.size}"
+        )
         if "model_path" in ds_prediction.attrs:
             copy_dict[key]["model_path"] = ds_prediction.attrs["model_path"]
 
@@ -211,7 +173,7 @@ def process_data(data, pred_dict):
 
     ### Combine Variables by level
     ds_groundtruth, pred_dict = combine_variables_by_level(
-        ds_groundtruth, ds_groundtruth.lev, pred_dict, combine_ground=False
+        ds_groundtruth, ds_groundtruth.lev, pred_dict
     )
 
     ### Postprocess predictions for plotting
