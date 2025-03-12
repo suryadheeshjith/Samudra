@@ -1,0 +1,66 @@
+debug: false
+disk_mode: true
+pin_mem: true
+save_freq: 55 # Can set this to a lower number to save individual checkpoints more frequently
+epochs: 70
+batch_size: 4
+learning_rate: 0.0002
+scheduler: true
+loss: mse
+inference_epochs: [-1] # Perform inference rollout at every epoch
+train:
+  start_time: "1975-01-03"
+  end_time: "2014-01-13"
+val:
+  start_time: "2014-01-18"
+  end_time: "2014-09-20"
+inference:
+  - start_time: "2014-01-18"
+    end_time: "2014-09-20"
+data_stride: [1]
+steps: [4]
+step_transition: []
+
+distributed:
+  enabled: true
+  dist_url: null
+  world_size: null
+  rank: null
+  gpu: null
+  dist_backend: null
+
+experiment:
+  name: train
+  sub_name: om4_samudra
+  rand_seed: 5
+  base_output_dir: train
+  data_dir: local/path/to/data-dir # FILL IN
+  network: samudra
+  prognostic_vars_key: thermo_dynamic # thermo_dynamic or thermo
+  boundary_vars_key: hfds_anom
+data:
+  data_path: data.zarr # FILL IN
+  data_means_path: means.zarr # FILL IN
+  data_stds_path: stds.zarr # FILL IN
+  time_delta: 5
+  num_workers: 4
+  hist: 1
+
+
+unet:
+  ch_width: [158, 200, 250, 300, 400] # This includes input channels
+  n_out: 154
+  dilation: [1, 2, 4, 8]
+  n_layers: [1, 1, 1, 1]
+  last_kernel_size: 3
+  pad: "circular"
+
+  core_block:
+    block_type: "conv_next_block"
+    kernel_size: 3
+    activation: "capped_gelu"
+    upscale_factor: 4
+    norm: "batch"
+
+  down_sampling_block: "avg_pool"
+  up_sampling_block: "bilinear_upsample"

@@ -1,50 +1,115 @@
-# Samudra 🌊
-This repository contains the code of the Samudra Ocean Emulator described in the paper ["Samudra: An AI Global Ocean Emulator for Climate"](https://arxiv.org/abs/2412.03795). Samudra is a skillful global emulator of the ocean component of a state-of-the-art climate model. We emulate key ocean variables, sea surface height, horizontal velocities, temperature, and salinity, across their full depth. 
+# Samudra: A Global Ocean Emulator
+
+This repository contains the implementation of Samudra, a global ocean emulator described in ["Samudra: An AI Global Ocean Emulator for Climate"](https://arxiv.org/abs/2412.03795). Samudra efficiently emulates the ocean component of a state-of-the-art climate model, accurately reproducing key ocean variables including sea surface height, horizontal velocities, temperature, and salinity, across their full depth.
 
 <p align="center">
   <img src="/assets/globe.gif" >
 </p>
 
+## Overview
 
-### Key features
-
-- Reliable ✅ : Capable of reproducing the temperature structure and variability of a realistic 3D ocean climate model
-- Stable ✅ : run for multiple centuries in a realistic configuration with time-dependent forcing while maintaining stability and accuracy 
-- Fast ✅ : it is 🚅150 times faster🚅 than its original counterpart 
-- Open ✅ : Samudra is available on Hugging Face. Anyone can now run a global ocean emulator! 
+Samudra reproduces the 3D ocean temperature structure and variability of the OM4 climate model with high fidelity, while also demonstrating stable long-term performance under realistic, time-varying forcing conditions. It achieves a significant speedup as well—rolling out a 100-year simulation is approximately 150 times faster than the original model.
 
 <p align="center">
   <img src="/assets/enso.gif" >
 </p>
 
-### Getting Started
-1. Clone this repository. 
-2. Create a new conda environment using the `environment.yml` file.
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/suryadheeshjith/Samudra.git
+cd Samudra
+```
+
+2. Set up the environment using either method:
+
+Using conda:
 ```bash
 conda env create -f environment.yml
 ```
-Alternatively, create a new python environment with [`uv`](https://docs.astral.sh/uv/):
+
+Using [`uv`](https://docs.astral.sh/uv/):
 ```bash
 uv sync
 source .venv/bin/activate
 ```
 
-3. Run the notebook `samudra_rollout.ipynb` to generate a rollout with trained model weights.
+## Usage
 
-Notebooks `samudra_plotting.ipynb` and `samudra_plotting_multiseed.ipynb` contain the code to generate the plots in the paper using a generated rollout.
+To train or rollout Samudra, download the OM4 data and statistics referenced in the [OM4 Data](#om4-data) section. You can also substitute your own data, provided it aligns with the same format. Note that mean and standard deviation files are precomputed for training and model rollouts; if you opt to use your own data, you will need to compute these statistics yourself.
 
-### Model Weights and Data
-The model weights are currently hosted on huggingface and can be downloaded from [here](https://huggingface.co/M2LInES/Samudra). The OM4 data used for training and testing the models in the paper can be accessed using: 
+Should you wish to evaluate Samudra directly, you may use the pre-trained model weights discussed in the [Trained Model Weights](#trained-model-weights) section.
+
+### Training
+A default training configuration is provided in the file configs/train_samudra_om4.yaml. Update all fields marked with # FILL IN to reference your local data paths and files for OM4 data and statistics.
+
+> Note: Ensure your environment is activated before training.
+```bash
+# Train a new model
+python src/train.py --config path/to/train_config.yaml
+```
+
+### Rollout
+A default rollout configuration is provided in configs/rollout_samudra_om4.yaml. Update all fields marked with # FILL IN to reference your local data paths and files for OM4 data and statistics.
+
+> Note: Ensure your environment is activated before training.
+```bash
+# Produce a rollout from a trained model (and optionally save the result)
+python src/rollout.py --config path/to/rollout_config.yaml --ckpt_path path/to/checkpoint.pt --save_zarr
+```
+
+> Note: For both training and rollout, you may change the experiment name in the config files or use `--sub_name` argument in the command line to specify a different name for the output directory.
+
+## OM4 Data
+The OM4 data and corresponding statistics are publicly available as Zarr files via our hosted pod.
 
 ```python
 import xarray as xr
-data = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4", engine='zarr', chunks={})
+
+# Download statistics
+means = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_means", engine='zarr', chunks={})
+means.to_zarr("local/path/to/data-dir/means.zarr")
+
+stds = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4_stds", engine='zarr', chunks={})
+stds.to_zarr("local/path/to/data-dir/stds.zarr")
 ```
 
-For more details on the data and the model, please refer to the paper.
+Downloading the entire dataset (~70 GB) can be time-consuming, depending on your network speed. If you only need to evaluate Samudra on the test set, a reduced dataset (~12 GB) is sufficient.
 
-### Citing
-If you use this code in your research, please consider citing the following paper:
+```python
+import xarray as xr
+
+# Download the entire data
+data = xr.open_dataset("https://nyu1.osn.mghpcc.org/m2lines-pubs/Samudra/OM4", engine='zarr', chunks={})
+
+# For training ~ 70GB
+data.to_zarr("local/path/to/data-dir/data.zarr")
+
+# (OR) For evaluation ~ 12GB
+data.sel(time=slice("2014-10-10", "2022-12-24")).to_zarr("local/path/to/data-dir/data.zarr")
+```
+
+## Trained Model Weights
+Pre-trained weights for Samudra are available on [Hugging Face](https://huggingface.co/M2LInES/Samudra). You can download them as follows:
+```bash
+# Download the weights for thermo model
+wget https://huggingface.co/M2LInES/Samudra/resolve/main/samudra_thermo_seed1.pt
+
+# (OR) Download the weights for thermo-dynamic model
+wget https://huggingface.co/M2LInES/Samudra/resolve/main/samudra_thermo_dynamic_seed1.pt
+```
+
+There are 5 seeds saved for each model.
+
+## Paper Plots
+The notebooks in the `notebooks` folder reproduce most of the plots from the paper.
+
+Further methodological details and model architecture specifications can be found in the [paper](https://arxiv.org/abs/2412.03795).
+
+## Citation
+
+If you find this code useful in your research, please cite:
 ```
 @article{dheeshjith2024samudra,
   title={Samudra: An AI Global Ocean Emulator for Climate},
