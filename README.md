@@ -1,6 +1,6 @@
 # Samudra: A Global Ocean Emulator
 
-This repository contains the implementation of Samudra, a global ocean emulator described in ["Samudra: An AI Global Ocean Emulator for Climate"](https://arxiv.org/abs/2412.03795). Samudra efficiently emulates the ocean component of a state-of-the-art climate model, accurately reproducing key ocean variables including sea surface height, horizontal velocities, temperature, and salinity, across their full depth.
+This repository contains the implementation of Samudra, a global ocean emulator described in ["Samudra: An AI Global Ocean Emulator for Climate"](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024GL114318). Samudra efficiently emulates the ocean component of a state-of-the-art climate model, accurately reproducing key ocean variables including sea surface height, horizontal velocities, temperature, and salinity, across their full depth.
 
 <p align="center">
   <img src="/assets/globe.gif" >
@@ -106,16 +106,20 @@ There are 5 seeds saved for each model.
 ## Paper Plots
 The notebooks in the `notebooks` folder reproduce most of the plots from the paper.
 
-Further methodological details and model architecture specifications can be found in the [paper](https://arxiv.org/abs/2412.03795).
+Further methodological details and model architecture specifications can be found in the [paper](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2024GL114318).
 
 ## Citation
 
 If you find this code useful in your research, please cite:
 ```
-@article{dheeshjith2024samudra,
-  title={Samudra: An AI Global Ocean Emulator for Climate},
+@article{dheeshjith2025samudra,
+  title={Samudra: An ai global ocean emulator for climate},
   author={Dheeshjith, Surya and Subel, Adam and Adcroft, Alistair and Busecke, Julius and Fernandez-Granda, Carlos and Gupta, Shubham and Zanna, Laure},
-  journal={arXiv preprint arXiv:2412.03795},
-  year={2024}
+  journal={Geophysical Research Letters},
+  volume={52},
+  number={10},
+  pages={e2024GL114318},
+  year={2025},
+  publisher={Wiley Online Library}
 }
 ```
